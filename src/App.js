@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import Form from "./Form";
 
-class App extends Component {
-  render() {
+function App(props) {
     return (
       <>
         <Navbar />
@@ -11,6 +10,6 @@ class App extends Component {
       </>
     );
   }
-}
+
 
 export default App;
