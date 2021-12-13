@@ -9,18 +9,29 @@ import Switch from '@material-ui/core/Switch';
 
 import { withStyles } from '@material-ui/core/styles';
 import { ThemeContext } from './contexts/ThemeContext';
+import { LanguageContext } from './contexts/LanguageContext';
 
 import styles from './styles/NavBarStyles';
 
+const langOptions = {
+	english: { flag: '🇬🇧', flagAriaLabel: 'flag of england', search: 'Search...' },
+	russian: { flag: '🇷🇺', flagAriaLabel: 'flag of russia', search: 'Поиск...' },
+	german: { flag: '🇩🇪', flagAriaLabel: 'flag of germany', search: 'Suchen...' },
+};
+
 function Navbar(props) {
 	const { isDarkmode, toggleIsDarkmode } = useContext(ThemeContext);
+	const { language } = useContext(LanguageContext);
 	const { classes } = props;
+	const { flag, flagAriaLabel, search } = langOptions[language];
 	return (
 		<div className={classes.root}>
 			<AppBar position='static' color={isDarkmode ? 'default' : 'primary'}>
 				<Toolbar>
 					<IconButton className={classes.menuButton} color='inherit'>
-						<span role='img' aria-label="french flag">🇫🇷</span>
+						<span role='img' aria-label={flagAriaLabel}>
+							{flag}
+						</span>
 					</IconButton>
 					<Typography className={classes.title} variant='h6' color='inherit'>
 						App Title
@@ -32,7 +43,7 @@ function Navbar(props) {
 							<SearchIcon />
 						</div>
 						<InputBase
-							placeholder='Search...'
+							placeholder={search}
 							classes={{
 								root: classes.inputRoot,
 								input: classes.inputInput,
